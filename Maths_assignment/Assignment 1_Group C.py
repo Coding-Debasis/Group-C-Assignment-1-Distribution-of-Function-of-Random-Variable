@@ -94,6 +94,13 @@ def plot_distribution(name, parameters, vals):
     """
     try:
         probabilities = get_probability_distribution(name, parameters, vals)
+        
+        # Print the distribution values
+        for v, prob in zip(vals, probabilities):
+            print(f"Value: {v}, Probability: {prob:.4f}")
+        
+        plt.style.use('ggplot')
+        
         plt.bar(vals, probabilities, alpha=0.7, label=name.capitalize())
         plt.xlabel("Values")
         plt.ylabel("Probability")
