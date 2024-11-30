@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+
 import numpy as np
 import matplotlib.pyplot as plt
 import warnings
@@ -37,7 +37,7 @@ def filter_values(vals):
     # Display the filtering process
     if removed_values:
         print(f"Removed negative values: {removed_values}")
-    print(f"Remaining positive values: {remaining_values}")
+    print(f"Positive values after filtering : {remaining_values}")
 
     if not remaining_values:
         raise ValueError("All input values are negative. Cannot compute probabilities.")
