@@ -95,15 +95,16 @@ def plot_distribution(name, parameters, vals):
     try:
         probabilities = get_probability_distribution(name, parameters, vals)
         
-        # Print the distribution values
-        for v, prob in zip(vals, probabilities):
-            print(f"Value: {v}, Probability: {prob:.4f}")
+        # Print the probabilities
+        print(f"Probabilities for {name.capitalize()} Distribution with parameters {parameters}:")
+        for val, prob in zip(vals, probabilities):
+            print(f"Value: {val}, Probability: {prob}")
         
+        # Plot the values and probabilities
         plt.style.use('ggplot')
-        
         plt.bar(vals, probabilities, alpha=0.7, label=name.capitalize())
         plt.xlabel("Values")
-        plt.ylabel("Probability")
+        plt.ylabel("Probability" if name != 'uniform' else "Density")
         plt.title(f"{name.capitalize()} Distribution")
         plt.legend()
         plt.show()
@@ -122,10 +123,18 @@ def get_user_input():
     start = int(input("Enter the start of the range of x values (integer): "))
     end = int(input("Enter the end of the range of x values (integer): "))
     
-    if start < 0 or end < 0:
-        raise ValueError("The start and end of the range of x values must be non-negative.")
+    if start < 0 and end < 0:
+        raise ValueError("Both start and end of the range of x values cannot be negative.")
+    
+    # Convert negative start or end values to positive
+    if start < 0:
+        start = abs(start)
+    if end < 0:
+        end = abs(end)
     
     vals = np.arange(start, end + 1)
+    
+    print(f"Range of x values: {vals}")
     
     # Get distribution-specific parameters
     parameters = {}
